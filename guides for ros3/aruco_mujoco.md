@@ -110,6 +110,8 @@ scene_path = Path(__file__).resolve().parent / "go2_scene" / "scene.xml"
 model = mujoco.MjModel.from_xml_path(str(scene_path))
 data = mujoco.MjData(model)
 
+mujoco.mj_forward(model, data)
+
 renderer = mujoco.Renderer(model, height=480, width=640)
 renderer.update_scene(data, camera="aruco_cam")
 
