@@ -1,1 +1,2 @@
-# Mujoco
+# Aruco Detector in Mujoco
+
