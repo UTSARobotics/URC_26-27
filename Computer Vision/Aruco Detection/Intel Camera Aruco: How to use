@@ -1,0 +1,10 @@
+Info:
+Aruco detection with the Intell camera and varying contrast, grayscale, and sharpness strength
+Detection time not working
+
+Installation / Running:
+In the virtual environment run: python -m pip install pyrealsense2 
+Press q: closes camera
+Press 1: gray scale image
+Press 2-5: Increase contrast (Clahe clipLimit)
+Pres 0: back to rgb image 
