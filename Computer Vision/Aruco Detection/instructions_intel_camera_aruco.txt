@@ -1,5 +1,5 @@
 Info:
-Aruco detection with the Intell camera and varying contrast, grayscale, and sharpness strength
+Aruco detection with the Intel camera and varying contrast, grayscale, and sharpness strength
 Detection time not working
 
 Installation / Running:
