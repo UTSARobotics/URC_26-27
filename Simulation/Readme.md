@@ -1,6 +1,7 @@
 # Aruco Detector in Mujoco
 
-This guide shows how to detect an aruco marker in mujoco. !!The `mujoco_aruco` guide under "guides for ros3" needs to be followed before this!!
+This guide shows how to detect an aruco marker in mujoco. 
+### The `mujoco_aruco` guide under "guides for ros3" needs to be followed before this
 
 ## Folder Setup
 Potential folder layout in `~/ros3_ws/src/mujoco_projects`:
