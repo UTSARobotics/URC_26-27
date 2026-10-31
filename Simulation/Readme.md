@@ -87,3 +87,42 @@ finally:
     renderer.close()
     cv2.destroyAllWindows()
 ```
+
+## Printing Detections
+
+The same `aruco_sub.py` from ros3 installation can be used to print detections:
+```python
+import ros3 as rose
+
+TOPIC = "aruco_detections"
+
+node = rose.Node("aruco_subscriber")
+subscriber = node.subscriber(TOPIC)
+
+print(f"Listening on '{TOPIC}'...")
+
+while node.ok():
+    for message in subscriber:
+        print("Detections:", message)
+```
+
+## Running everything
+
+Open a terminal and activate your virtual environment, then inside of your `mujoco_projects` folder, run:
+```python
+python aruco_publisher_mujoco.py
+```
+
+A window should pop up showing the detected aruco marker in mujoco from the go2 head POV.
+
+Open another terminal and go to where the aruco subscriper file is, and run:
+```python
+python aruco_sub.py
+```
+Detections should now be printing in that terminal.
+
+
+## Potential Errors
+
+If you get the "no module named 'ros3'" error, then ros3 can't be found inside of your virtual environment. What fixed this for me is changing the `include-system-site-packages = false` inside of the `my_venv/pyvenv.cfg` to equal true.
+
