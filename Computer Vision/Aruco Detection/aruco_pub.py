@@ -70,34 +70,10 @@ publisher = node.publisher(
     TOPIC,
     message_size=1024,
     rate=30
-)
-
-# CLAHE Setup
-clahe_modes = {
-    2: cv2.createCLAHE(
-        clipLimit=1.0,
-        tileGridSize=(8, 8)
-    ),
-    3: cv2.createCLAHE(
-        clipLimit=2.0,
-        tileGridSize=(8, 8)
-    ),
-    4: cv2.createCLAHE(
-        clipLimit=3.0,
-        tileGridSize=(8, 8)
-    ),
-    5: cv2.createCLAHE(
-        clipLimit=4.0,
-        tileGridSize=(8, 8)
-    )
-}
-
-mode = 0
+) 
 
 print("CV-01 RealSense ArUco Detection")
-print("0 = Original")
-print("1 = Grayscale")
-print("2-5 = CLAHE Contrast Increase")
+print("CLAHE Grayscale Contrast")
 print("q = Quit")
 
 # Main Loop
@@ -119,24 +95,12 @@ try:
             cv2.COLOR_BGR2GRAY
         )
 
-        # Image processing modes
-        if mode == 0:
-            processed = frame
-        elif mode == 1:
-            processed = gray
-        else:
-            processed = clahe_modes[mode].apply(gray)
-
-        # Detection Timer
-        start_time = time.perf_counter()
+        # Image processing
+        processed = cv2.createCLAHE(clipLimit=3.0, tileGridSize=(8, 8)).apply(gray)
 
         corners, ids, _ = detector.detectMarkers(
             processed
         )
-
-        detection_ms = (
-            time.perf_counter() - start_time
-        ) * 1000
 
         detections = []
 
@@ -194,18 +158,8 @@ try:
         # Display Information
         cv2.putText(
             frame,
-            f"Mode: {mode} | Markers: {len(detections)}",
+            f"Markers: {len(detections)}",
             (20, 40),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.8,
-            (0, 255, 0),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Detection: {detection_ms:.2f} ms",
-            (20, 80),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.8,
             (0, 255, 0),
@@ -226,20 +180,6 @@ try:
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
-
-        elif key in [
-            ord("0"),
-            ord("1"),
-            ord("2"),
-            ord("3"),
-            ord("4"),
-            ord("5")
-        ]:
-            mode = int(chr(key))
-
-            print(
-                f"Switched to mode {mode}"
-            )
 
 finally:
     pipeline.stop()
