@@ -1,0 +1,6 @@
+# Setup a standard Quad-X frame class and type
+FRAME_CLASS     1
+FRAME_TYPE      1
+# Disable arming checks to bypass missing hardware constraints
+ARMING_CHECK    0
+

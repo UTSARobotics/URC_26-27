@@ -7,8 +7,8 @@
         <!-- Ground plane -->
         <geom name="floor" type="plane" size="10 10 0.1" rgba="0.8 0.8 0.8 1"/>
         
-        <!-- Quadcopter Fuselage Box centered at 0.5 meters high -->
-        <body name="chassis" pos="0 0 0.5">
+        <!-- Renamed body to 'quadcopter' to match your Python bridge script object mapping -->
+        <body name="quadcopter" pos="0 0 0.02">
             <freejoint name="root"/>
             <geom type="box" size="0.15 0.15 0.04" rgba="0.1 0.5 0.8 1" mass="1.0"/>
             
@@ -24,8 +24,8 @@
             <site name="motor3_site" pos=" 0.25 -0.25 0.01" size="0.01"/>
             <site name="motor4_site" pos="-0.25  0.25 0.01" size="0.01"/>
 
-            <!-- Fixed IMU Sensor site (welded inside the box frame) -->
-            <site name="imu" pos="0 0 0" size="0.01" rgba="1 0 0 1"/>
+            <!-- Renamed to 'imu_site' to match the sensor block below -->
+            <site name="imu_site" pos="0 0 0" size="0.01" rgba="1 0 0 1"/>
         </body>
     </worldbody>
 
@@ -36,4 +36,10 @@
         <motor name="motor3" site="motor3_site" gear="0 0 25 0 0 0"/>
         <motor name="motor4" site="motor4_site" gear="0 0 25 0 0 0"/>
     </actuator>
+
+    <!-- Sensors correctly mapped to the updated imu_site asset above -->
+    <sensor>
+        <gyro name="gyro" site="imu_site"/>
+        <accelerometer name="accelerometer" site="imu_site"/>
+    </sensor>
 </mujoco>
