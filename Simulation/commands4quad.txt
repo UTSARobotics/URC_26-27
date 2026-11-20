@@ -1,0 +1,11 @@
+1st window
+python3 mujoco_sitl_bridge.py 
+
+2nd window
+  ../Tools/autotest/sim_vehicle.py -v ArduCopter --model JSON:127.0.0.1 --console --map --add-param-file=/home/victor/ardupilot/ArduCopter/mujoco.parm -w
+
+3rd window
+./QGroundControl-x86_64.AppImage
+
+
+
